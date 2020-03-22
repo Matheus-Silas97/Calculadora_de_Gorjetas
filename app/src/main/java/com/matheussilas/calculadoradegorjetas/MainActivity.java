@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.text.DecimalFormat;
+
 public class MainActivity extends AppCompatActivity {
 
     private TextInputEditText editPrice;
@@ -53,22 +55,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void calculate() {
+
+        DecimalFormat format = new DecimalFormat("0.00");
+
         String price = editPrice.getText().toString();
         if (price == null || price.equals("")) {
             Toast.makeText(getApplicationContext(), "Digite o valor da conta", Toast.LENGTH_SHORT).show();
         } else {
+
             double number = Double.parseDouble(price);
 
             double resultGorj = number * (porc / 100);
 
-            textGorj.setText("R$ " + resultGorj);
+            textGorj.setText("R$ " + format.format(resultGorj));
 
             double resultTotal = number + resultGorj;
 
-            textTotal.setText("R$ " + resultTotal);
-
+            textTotal.setText("R$ " + format.format(resultTotal));
 
         }
-
     }
 }
